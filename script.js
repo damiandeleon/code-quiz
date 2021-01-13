@@ -4,12 +4,11 @@ var timerElement = document.querySelector(".timer-count");
 var score = document.querySelector(".score");
 var startButton = document.querySelector("#start-button");
 
-
+timerCount = 120;
 //set up timer process
 function startTimer() {
     // Sets timer
-    timer = setInterval(function () {
-        timerCount = 120;
+    var timer = setInterval(function () {
         timerCount--;
         timerElement.innerText = timerCount;
         // if (timerCount >= 0) {
