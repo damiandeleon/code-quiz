@@ -10,7 +10,8 @@ var startButton = document.querySelector("#start-button");
 var directions = document.querySelector(".directions");
 var directionsEl = document.createElement("h2");
 var header = document.querySelector(".header");
-var section = document.querySelector("section");
+var section = document.querySelector(".section");
+var container = document.querySelector(".container")
 
 //**************************//
 
@@ -19,12 +20,12 @@ headerInfo.textContent = "Coding Quiz Challenge";
 directions.innerHTML = "We Love Quizzes!  Do your best to answer as many as you can before the timer runs out! Wrong answers take 20 seconds off the timer.";
 
 //style the content below
-header.setAttribute("style", "width:100%")
-timerInfo.setAttribute("style", "margin:20px; text-align:center ");
-headerInfo.setAttribute("style", "color:green; margin:auto; text-align:center; background-color:lightgray; border:black solid; ");
-directions.setAttribute("style", "font-size:13px; margin:auto: text-align:center");
-score.setAttribute("style", "text-align:center");
-startButton.setAttribute("style", "margin:auto; text-align:center");
+timerInfo.setAttribute("style", "font-size: 18px; font-weight: bold; background-color: lightgray; border:black solid 2px; color:darkred");
+score.setAttribute("style", "font-size: 18px; font-weight: bold");
+header.setAttribute("style", "width:100%");
+headerInfo.setAttribute("style", "color:green; margin:auto; text-align:center; background-color:lightgray; border:black solid; width:100%");
+directions.setAttribute("style", "font-size:13px; margin:auto:");
+container.setAttribute("style", "text-align:center");
 
 
 
@@ -54,6 +55,9 @@ function startTimer() {
     }, 1000);
 }
 
+//set up questions and answers
+//question should show up as a text above the answers
+//answers should list out as a multiple choice by setting them up as objects and A1, A2, A3, A4 be the propery and the answer being the value of those properties.
 
 //function to accept the user's initials and score to save in the local storage
 
