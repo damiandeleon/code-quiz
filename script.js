@@ -92,11 +92,26 @@ function presentQuestion(){
     question.textContent = quizQuestions[questionCycle].question;
     for (let i = 0; i < quizQuestions[0].choices.length; i++) {
         var choicebutton = document.createElement("button");
+        choicebutton.setAttribute("id", "choice"+[i]);
         choicebutton.textContent = quizQuestions[0].choices[i];
         answerList.appendChild(choicebutton);
+
         //as the program cycles through presenting the question, call the function "checkAnswer"
-        // choicebutton.onclick = checkAnswer();
-    }console.log("hello");
+        choicebutton.onclick = checkAnswer();
+        questionCycle++
+        function checkAnswer(){
+            console.log(choicebutton);
+            console.log(quizQuestions[0].correctAnswer);
+            var test = (choicebutton == quizQuestions[0].correctAnswer.value);
+            console.log(test)
+            // if(choice1 == quizQuestions[0].correctAnswer){
+            //     alert("Great job");
+            // }
+            // questionCycle++
+            // presentQuestion(questionCycle);
+        
+        }
+    }
 }
 
 
@@ -105,10 +120,7 @@ function presentQuestion(){
 // write if statement to check if the user entry matches "CorrectAnswer1" to execute the follow:  IF TRUE: increase score by 1, advance to presentQuestion2().  IF FALSE: no action on the score, reduce the time by 20 seconds, move on to presentQuestion2().
 // function presentQuestion(0)
 
-// function checkAnswer(){
-//     questionCyele = 1
 
-// // }
 
 
 
