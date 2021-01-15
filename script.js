@@ -71,7 +71,7 @@ quizQuestions = [
         correctAnswer: "Yes",
     },
     {
-        question: "Which of the following functions returns a string value to uppoercase?,
+        question: "Which of the following functions returns a string value to uppoercase?",
         choices: ["toLocateUpperCase()", "toUpperCase()", "toString()", "ubstring()"],
         correctAnswer: "toUpperCase()",
     },
