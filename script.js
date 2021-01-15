@@ -64,10 +64,8 @@ function startTimer() {
 //set up questions and answers
 //answers should list out as a multiple choice by setting them up as objects and A1, A2, A3, A4 be the propery and the answer being the value of those properties.
 
-presentQuestion();
-function presentQuestion() {
 
-
+function presentQuestion1() {
     var q1 = "Is JavaScript a case-sensitive language?"
     var q1Answers = {
         //Q1A1 is correct
@@ -76,17 +74,36 @@ function presentQuestion() {
         Q1A3: "Not always",
         Q1A4: "Only when running HTML"
     }
-    console.log(q1Answers)
+    question.textContent = q1;
+    choice1.textContent = q1Answers.Q1A1;
+    choice2.textContent = q1Answers.Q1A2;
+    choice3.textContent = q1Answers.Q1A3;
+    choice4.textContent = q1Answers.Q1A4;
+    //add a variable called "CorrectAnswer" that declares the correct answer
+    //add event listener "click" that marks the user's entry
+    // write if statement to check if the user entry matches "CorrectAnswer1" to execute the follow:  IF TRUE: increase score by 1, advance to presentQuestion2().  IF FALSE: no action on the score, reduce the time by 20 seconds, move on to presentQuestion2().
+}
 
+function presentQuestion2() {
     var q2 = "Which of the following functions returns a string value to uppoercase?"
     var q2Answers = {
         //Q2A2 is correct
-        Q1A1: "toLocateUpperCase()",
+        Q2A1: "toLocateUpperCase()",
         Q2A2: "toUpperCase()",
         Q2A3: "toString()",
         Q2A4: "substring()"
     }
+    question.textContent = q2;
+    choice1.textContent = q2Answers.Q2A1;
+    choice2.textContent = q2Answers.Q2A2;
+    choice3.textContent = q2Answers.Q2A3;
+    choice4.textContent = q2Answers.Q2A4;
+    //add a variable called "CorrectAnswer2" that declares the correct answer
+    //add event listener "click" that marks the user's entry
+    // write if statement to check if the user entry matches "CorrectAnswer2" to execute the follow:  IF TRUE: increase score by 1, advance to presentQuestion3().  IF FALSE: no action on the score, reduce the time by 20 seconds, move on to presentQuestion3().
+}
 
+function presentQuestion3() {
     var q3 = "Which of the following function of String object causes a string to be displayed as a subscript, as if it were in a <sub> tag?"
     var q3Answers = {
         //Q3A4 is correct
@@ -95,21 +112,37 @@ function presentQuestion() {
         Q3A3: "strike()",
         Q3A4: "sub()"
     }
+    question.textContent = q3;
+    choice1.textContent = q3Answers.Q3A1;
+    choice2.textContent = q3Answers.Q3A2;
+    choice3.textContent = q3Answers.Q3A3;
+    choice4.textContent = q3Answers.Q3A4;
+    //add a variable called "CorrectAnswer3" that declares the correct answer
+    //add event listener "click" that marks the user's entry
+    // write if statement to check if the user entry matches "CorrectAnswer3" to execute the follow:  IF TRUE: increase score by 1, advance to presentQuestion4().  IF FALSE: no action on the score, reduce the time by 20 seconds, move on to presentQuestion4().
+}
 
+function presentQuestion4(){
     var q4 = "Which of the following function of Array object reverses the order of the elements of an array?"
     var q4Answers = {
         //Q3A1 is corect
-        Q3A1: "reverse()",
-        Q3A2: "push()",
-        Q3A3: "reduce()",
-        Q3A4: "reduceRight()"
+        Q4A1: "reverse()",
+        Q4A2: "push()",
+        Q4A3: "reduce()",
+        Q4A4: "reduceRight()"
     }
-    question.textContent = q1;
-    choice1.textContent = q1Answers.Q1A1;
-    choice2.textContent = q1Answers.Q1A2;
-    choice3.textContent = q1Answers.Q1A3;
-    choice4.textContent = q1Answers.Q1A4;
+    question.textContent = q4;
+    choice1.textContent = q4Answers.Q4A1;
+    choice2.textContent = q4Answers.Q4A2;
+    choice3.textContent = q4Answers.Q4A3;
+    choice4.textContent = q4Answers.Q4A4;
+    //add a variable called "CorrectAnswer4" that declares the correct answer
+    //add event listener "click" that marks the user's entry
+    // write if statement to check if the user entry matches "CorrectAnswer4" to execute the follow:  IF TRUE: increase score by 1, pushes user to fucntion UserInfo().  IF FALSE: no action on the score, pushes user to function UserInfo().
 }
+
+    
+
 //question should show up as a text above the answers
 
 
@@ -137,3 +170,4 @@ function presentQuestion() {
 
 //
 startButton.addEventListener("click", startTimer);
+startButton.addEventListener("click", presentQuestion1);
