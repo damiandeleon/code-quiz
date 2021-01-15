@@ -3,8 +3,10 @@
 ## Questions and Answers:  
 Credit:  Tutorialspoint website:  https://www.tutorialspoint.com/javascript/javascript_online_quiz.htm
 Question1:  Is JavaScript a case-sensitive language?
-Q1A1: Yes - correct
-Q1A2: No
+Q1A1: Yes, - correct
+Q1A2: No,
+Q1A3: Not always, - this answer was added by Damian De Leon
+Q1A4: Only when running HTML - this answer was added by Damian De Leon
 
 Question2: Which of the following functions returns a string value to uppoercase?
 Q2A1: toLocateUpperCase(),

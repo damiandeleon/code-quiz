@@ -10,24 +10,27 @@
 <body>
     <header class="header">
         <h1 class="headerInfo"></h1>
+        <p class="directions"></p>
 
-        
     </header>
     <main>
         <div class="container">
-            <p class="directions"></p>
-            <p class="timer-count">Time remaining: 60</p>
-            <p class="score">Score:0</p>
-            <button id="start-button">START</button>
-    
-            <div class="score-container">
-               
-            </div>
-        </section>
+            <section>
+                <p class="timer-count">Time remaining: 120</p>
+                <h2 class="score">Score:0</h2>
+                <button id="start-button">START</button>
+                <div class="score-container">
+                </div>
+            </section>
 
-        <section>
-            
-        </section>
+            <section class=quiz-content>
+                <h2 id="questions"></h2>
+                <div id="answerList"></div>
+                <div id="result"></div>
+            </section>
+
+        </div>
+
     </main>
     <script src="./script.js"></script>
 </body>

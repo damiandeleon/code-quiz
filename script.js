@@ -24,7 +24,7 @@ timerInfo.setAttribute("style", "font-size: 18px; font-weight: bold; background-
 score.setAttribute("style", "font-size: 18px; font-weight: bold");
 header.setAttribute("style", "width:100%");
 headerInfo.setAttribute("style", "color:green; margin:auto; text-align:center; background-color:lightgray; border:black solid; width:100%");
-directions.setAttribute("style", "font-size:13px; margin:auto:");
+directions.setAttribute("style", "font-size:13px; padding:5px; text-align:center");
 container.setAttribute("style", "text-align:center");
 
 
@@ -38,14 +38,7 @@ function startTimer() {
     var timer = setInterval(function () {
         timerCount--;
         timerInfo.textContent = "Time remaining: " + timerCount;
-        // if (timerCount >= 0) {
-            // Tests if win condition is met
-            
-                // Clears interval and stops timer
-                // clearInterval(timer);
-                // return
-            
-        // }
+        
         // Tests if time has run out
         if (timerCount === 0) {
             // Clears interval
@@ -78,19 +71,19 @@ var q2Answers = {
 var q3 = "Which of the following function of String object causes a string to be displayed as a subscript, as if it were in a <sub> tag?"
 var q3Answers = {
     //Q3A4 is correct
-    Q3A1: sup(),
-    Q3A2: small(),
-    Q3A3: strike(),
-    Q3A4: sub()
+    Q3A1: "sup()",
+    Q3A2: "small()",
+    Q3A3: "strike()",
+    Q3A4: "sub()"
 }
 
 var q4 = "Which of the following function of Array object reverses the order of the elements of an array?"
 var q4Answers = {
     //Q3A1 is corect
-    Q3A1: reverse(),
-    Q3A2: push(),
-    Q3A3: reduce(),
-    Q3A4: reduceRight()
+    Q3A1: "reverse()",
+    Q3A2: "push()",
+    Q3A3: "reduce()",
+    Q3A4: "reduceRight()"
 }
 
 //question should show up as a text above the answers
@@ -107,9 +100,9 @@ var q4Answers = {
 
 //function to accept the user's initials and score to save in the local storage
 
-function UserInfo() {
+// function UserInfo() {
 
-}
+// }
 
 //
 startButton.addEventListener("click", startTimer);
