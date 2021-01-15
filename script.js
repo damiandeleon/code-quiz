@@ -19,7 +19,7 @@ var result = document.querySelector("#result");
 var choice1 = document.querySelector("#choice1");
 var choice2 = document.querySelector("#choice2");
 var choice3 = document.querySelector("#choice3");
-var choice4 = document.querySelector("#choice4");
+var choice0 = document.querySelector("#choice0");
 var li = document.querySelectorAll("li");
 
 //**************************//
@@ -92,7 +92,7 @@ function presentQuestion(){
     question.textContent = quizQuestions[questionCycle].question;
     for (let i = 0; i < quizQuestions[0].choices.length; i++) {
         var choicebutton = document.createElement("button");
-        choicebutton.setAttribute("id", "choice"+[i]);
+        choicebutton.setAttribute("value", quizQuestions[0].choices[i]);
         choicebutton.textContent = quizQuestions[0].choices[i];
         answerList.appendChild(choicebutton);
 
@@ -100,13 +100,13 @@ function presentQuestion(){
         choicebutton.onclick = checkAnswer();
         questionCycle++
         function checkAnswer(){
-            console.log(choicebutton);
+            console.log(choicebutton.value);
             console.log(quizQuestions[0].correctAnswer);
-            var test = (choicebutton == quizQuestions[0].correctAnswer.value);
+            var test = (choicebutton.value == quizQuestions[0].correctAnswer);
             console.log(test)
-            // if(choice1 == quizQuestions[0].correctAnswer){
-            //     alert("Great job");
-            // }
+            if(choice1 == quizQuestions[0].correctAnswer){
+                alert("Great job");
+            }
             // questionCycle++
             // presentQuestion(questionCycle);
         
