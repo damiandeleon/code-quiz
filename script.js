@@ -16,10 +16,7 @@ var quizContent = document.querySelector(".quiz-content");
 var question = document.querySelector("#question");
 var answerList = document.querySelector("#answerList");
 var result = document.querySelector("#result");
-var choice1 = document.querySelector("#choice1");
-var choice2 = document.querySelector("#choice2");
-var choice3 = document.querySelector("#choice3");
-var choice0 = document.querySelector("#choice0");
+
 var li = document.querySelectorAll("li");
 
 //**************************//
@@ -45,7 +42,7 @@ for (var i = 0; i < li.length; i++) {
 
 //set up timer process
 timerCount = 60;
-function startTimer() {
+function startTimer(event) {
     // Sets timer
     var timer = setInterval(function () {
         timerCount--;
@@ -59,6 +56,8 @@ function startTimer() {
             // UserInfo();
         }
     }, 1000);
+    event.preventDefault
+    presentQuestion();
 }
 
 //set up questions and answers under a single array called quizQuestions.  Inside create an array with the questions set which includes 1. the question, 2. the answer choices, and 3. the correct Answer.
@@ -87,32 +86,73 @@ quizQuestions = [
     },
 ]
 //create a function that will insert the value of each question set into the html page.  For the answers, create buttons for them and insert the answer text inside the corresponding button.
-var questionCycle = 0
+
 function presentQuestion(){
-    question.textContent = quizQuestions[questionCycle].question;
+    questionCycle = 0;
+ console.log(questionCycle);
+ for(let i=0; i<quizQuestions.length; i++); {
+     question.textContent = quizQuestions[i].question;
+ }
+   
     for (let i = 0; i < quizQuestions[0].choices.length; i++) {
+  
+   
         var choicebutton = document.createElement("button");
-        choicebutton.setAttribute("value", quizQuestions[0].choices[i]);
-        choicebutton.textContent = quizQuestions[0].choices[i];
+        choicebutton.setAttribute("id", "choicebutton"+[i])
+        // choicebutton.setAttribute("value", quizQuestions[0].choices[i]);
+        choicebutton.textContent = quizQuestions[questionCycle].choices[i];
         answerList.appendChild(choicebutton);
 
         //as the program cycles through presenting the question, call the function "checkAnswer"
-        choicebutton.onclick = checkAnswer();
-        questionCycle++
-        function checkAnswer(){
-            console.log(choicebutton.value);
-            console.log(quizQuestions[0].correctAnswer);
-            var test = (choicebutton.value == quizQuestions[0].correctAnswer);
-            console.log(test)
-            if(choice1 == quizQuestions[0].correctAnswer){
-                alert("Great job");
-            }
-            // questionCycle++
-            // presentQuestion(questionCycle);
-        
-        }
+
     }
+
+    var choice0 = document.querySelector("#choicebutton0");
+    var choice1 = document.querySelector("#choicebutton1");
+    var choice2 = document.querySelector("#choicebutton2");
+    var choice3 = document.querySelector("#choicebutton3");
+    choice0.addEventListener("click", function(){
+        if(choice0.textContent== quizQuestions[0].correctAnswer){
+            alert("Great job");
+        } else{
+            alert("sorry");
+        }
+        questionCycle = questionCycle + 1;
+        presentQuestion();
+        console.log(questionCycle);
+    });
+    choice1.addEventListener("click", function(){
+        if(choice1.textContent == quizQuestions[0].correctAnswer){
+            alert("Great job");
+        } else{
+            alert("sorry");
+        }
+    });
+    choice2.addEventListener("click", function(){
+        if(choice2.textContent== quizQuestions[0].correctAnswer){
+            alert("Great job");
+        } else{
+            alert("sorry");
+        }
+        // questionCycle++
+        presentQuestion();
+    });
+    choice3.addEventListener("click", function(){
+        if(choice3.textContent== quizQuestions[0].correctAnswer){
+            alert("Great job");
+        } else{
+            alert("sorry");
+        }
+        // questionCycle++
+        presentQuestion();
+    });
+ 
+  
+
+
 }
+
+
 
 
 //add a variable called "CorrectAnswer" that declares the correct answer
@@ -151,4 +191,3 @@ function presentQuestion(){
 
 //
 startButton.addEventListener("click", startTimer);
-startButton.addEventListener("click", presentQuestion);
