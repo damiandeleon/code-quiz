@@ -5,7 +5,7 @@ var body = document.body;
 var headerInfo = document.querySelector(".headerInfo")
 var timerCount;
 var timerInfo = document.querySelector(".timer-count");
-var score = document.querySelector(".score");
+var scoreEl = document.querySelector(".score");
 var startButton = document.querySelector("#start-button");
 var directions = document.querySelector(".directions");
 var directionsEl = document.createElement("h2");
@@ -16,8 +16,10 @@ var quizContent = document.querySelector(".quiz-content");
 var question = document.querySelector("#question");
 var answerList = document.querySelector("#answerList");
 var result = document.querySelector("#result");
-
+var questionCycle = 0;
 var li = document.querySelectorAll("li");
+var score = 0;
+var timer;
 
 //**************************//
 
@@ -27,7 +29,7 @@ directions.innerHTML = "We Love Quizzes!  Do your best to answer as many as you 
 
 //style the content below
 timerInfo.setAttribute("style", "font-size: 18px; font-weight: bold; background-color: lightgray; border:black solid 2px; color:darkred");
-score.setAttribute("style", "font-size: 18px; font-weight: bold");
+scoreEl.setAttribute("style", "font-size: 18px; font-weight: bold");
 header.setAttribute("style", "width:100%");
 headerInfo.setAttribute("style", "color:green; margin:auto; text-align:center; background-color:lightgray; border:black solid; width:100%");
 directions.setAttribute("style", "font-size:13px; padding:5px; text-align:center");
@@ -44,7 +46,7 @@ for (var i = 0; i < li.length; i++) {
 timerCount = 60;
 function startTimer(event) {
     // Sets timer
-    var timer = setInterval(function () {
+  timer = setInterval(function () {
         timerCount--;
         timerInfo.textContent = "Time remaining: " + timerCount;
 
@@ -88,68 +90,42 @@ quizQuestions = [
 //create a function that will insert the value of each question set into the html page.  For the answers, create buttons for them and insert the answer text inside the corresponding button.
 
 function presentQuestion(){
-    questionCycle = 0;
- console.log(questionCycle);
- for(let i=0; i<quizQuestions.length; i++); {
-     question.textContent = quizQuestions[i].question;
- }
-   
-    for (let i = 0; i < quizQuestions[0].choices.length; i++) {
-  
+ 
+    console.log(questionCycle);
+    answerList.textContent = "";
+     question.textContent = quizQuestions[questionCycle].question; 
+    for (let i = 0; i < quizQuestions[questionCycle].choices.length; i++) {
    
         var choicebutton = document.createElement("button");
-        choicebutton.setAttribute("id", "choicebutton"+[i])
-        // choicebutton.setAttribute("value", quizQuestions[0].choices[i]);
+        choicebutton.onclick = checkAnswer;
+        choicebutton.setAttribute("id", "choicebutton"+[i]);
+        choicebutton.setAttribute("value", quizQuestions[questionCycle].choices[i]);
         choicebutton.textContent = quizQuestions[questionCycle].choices[i];
         answerList.appendChild(choicebutton);
+
 
         //as the program cycles through presenting the question, call the function "checkAnswer"
 
     }
 
-    var choice0 = document.querySelector("#choicebutton0");
-    var choice1 = document.querySelector("#choicebutton1");
-    var choice2 = document.querySelector("#choicebutton2");
-    var choice3 = document.querySelector("#choicebutton3");
-    choice0.addEventListener("click", function(){
-        if(choice0.textContent== quizQuestions[0].correctAnswer){
-            alert("Great job");
-        } else{
-            alert("sorry");
-        }
-        questionCycle = questionCycle + 1;
+}
+
+function checkAnswer(){
+    if(questionCycle == quizQuestions.length-1){
+        clearInterval(timer);
+        timerInfo.textContent = "Game Over!";
+    }
+    if(this.value !== quizQuestions[questionCycle].correctAnswer){
+        questionCycle+=1;
+        timerCount-=20;
         presentQuestion();
-        console.log(questionCycle);
-    });
-    choice1.addEventListener("click", function(){
-        if(choice1.textContent == quizQuestions[0].correctAnswer){
-            alert("Great job");
-        } else{
-            alert("sorry");
-        }
-    });
-    choice2.addEventListener("click", function(){
-        if(choice2.textContent== quizQuestions[0].correctAnswer){
-            alert("Great job");
-        } else{
-            alert("sorry");
-        }
-        // questionCycle++
+    } else {
+        questionCycle+=1;
+        score+=1;
+        scoreEl.textContent = score; 
         presentQuestion();
-    });
-    choice3.addEventListener("click", function(){
-        if(choice3.textContent== quizQuestions[0].correctAnswer){
-            alert("Great job");
-        } else{
-            alert("sorry");
-        }
-        // questionCycle++
-        presentQuestion();
-    });
+    } 
  
-  
-
-
 }
 
 
