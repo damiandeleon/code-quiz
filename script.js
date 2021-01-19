@@ -20,14 +20,14 @@ var questionCycle = 0;
 var li = document.querySelectorAll("li");
 var score = 0;
 var timer;
-var initials = document.createElement("input");
-var submit = document.createElement("button");
+var initialsEL = document.createElement("input");
+var submitUserInfoEl = document.createElement("button");
 
 //**************************//
 
 //assign content to html
 headerInfo.textContent = "Coding Quiz Challenge";
-directions.innerHTML = "We Love Quizzes!  Do your best to answer as many as you can before the timer runs out! Wrong answers take 20 seconds off the timer.";
+directions.textContent = "We Love Quizzes!  Do your best to answer as many as you can before the timer runs out! Wrong answers take 20 seconds off the timer.";
 
 //style the content below
 timerInfo.setAttribute("style", "font-size: 18px; font-weight: bold; background-color: lightgray; border:black solid 2px; color:darkred");
@@ -39,8 +39,8 @@ container.setAttribute("style", "text-align:center");
 for (var i = 0; i < li.length; i++) {
     li[i].setAttribute("style", "display: flex; color: blue; font-weight: bolder; justify-content:right; border: black solid 1px; width:auto; background-color:lightgray; padding:5px");
 }
-initials.setAttribute("style", " display:block; margin-top:10px; margin-left:auto; margin-right:auto; background-color:whitesmoke; ")
-submit.setAttribute("style", "background-color:lightblue; width: 100px; height: 20px; display:block; margin-left:auto; margin-right:auto; margin-top:10px;");
+initialsEL.setAttribute("style", " display:block; margin-top:10px; margin-left:auto; margin-right:auto; background-color:whitesmoke; ")
+submitUserInfoEl.setAttribute("style", "background-color:lightblue; width: 100px; height: 20px; display:block; margin-left:auto; margin-right:auto; margin-top:10px;");
 
 
 
@@ -96,7 +96,6 @@ quizQuestions = [
 //create a function that will insert the value of each question set into the html page.  For the answers, create buttons for them and insert the answer text inside the corresponding button.
 
 function presentQuestion() {
-    console.log(questionCycle);
     answerList.textContent = "";
     question.textContent = quizQuestions[questionCycle].question;
     for (let i = 0; i < quizQuestions[questionCycle].choices.length; i++) {
@@ -115,6 +114,7 @@ function checkAnswer() {
     if (questionCycle == quizQuestions.length - 1) {
         clearInterval(timer);
         timerInfo.textContent = "Game Over!";
+        directions.innerHTML = "";
         scoreEl.textContent = "You're final score is " + score;
         startButton.remove();
         UserInfo();
@@ -146,11 +146,30 @@ function checkAnswer() {
 function UserInfo() {
     question.textContent = "All Done!  Please enter your initials in the text box below and click submit.";
     answerList.textContent = "";
-    document.body.appendChild(initials);
-    document.body.appendChild(submit);
-    submit.innerHTML = "Submit";
-    console.log("I'm am starting UserInfo");
+    document.body.appendChild(initialsEL);
+    initialsEL.setAttribute("id", "initials");
+    document.body.appendChild(submitUserInfoEl);
+
+    submitUserInfoEl.innerHTML = "Submit";
 }
+
+submitUserInfoEl.addEventListener("click", function(event) {
+    event.preventDefault();
+  
+    var initials = document.querySelector("#initials").value;
+    
+  
+    if (initials === "") {
+      displayMessage("error", "Initials cannot be blank");
+    } else {
+      question.textContent = "Successfully Submitted.";
+  
+      localStorage.setItem("initials", initials);
+      localStorage.setItem("score", score);
+    }
+  });
+
+
 
 
 startButton.addEventListener("click", startTimer);
