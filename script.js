@@ -22,6 +22,9 @@ var score = 0;
 var timer;
 var initialsEL = document.createElement("input");
 var submitUserInfoEl = document.createElement("button");
+var viewHighScoreBtn = document.createElement("button");
+var startOverBtn = document.createElement("button");
+var clearHighScore = document.createElement("button");
 
 //**************************//
 
@@ -41,6 +44,8 @@ for (var i = 0; i < li.length; i++) {
 }
 initialsEL.setAttribute("style", " display:block; margin-top:10px; margin-left:auto; margin-right:auto; background-color:whitesmoke; ")
 submitUserInfoEl.setAttribute("style", "background-color:lightblue; width: 100px; height: 20px; display:block; margin-left:auto; margin-right:auto; margin-top:10px;");
+viewHighScoreBtn.setAttribute("style", "background-color:lightblue; width: 100px; height: 20px; display:block; margin-left:auto; margin-right:auto; margin-top:10px; font-size:10px");
+clearHighScore.setAttribute("style", "background-color:lightblue; width: 100px; height: 20px; display:block; margin-left:auto; margin-right:auto; margin-top:10px; font-size:10px;");
 
 
 
@@ -149,27 +154,48 @@ function UserInfo() {
     document.body.appendChild(initialsEL);
     initialsEL.setAttribute("id", "initials");
     document.body.appendChild(submitUserInfoEl);
-
     submitUserInfoEl.innerHTML = "Submit";
+    document.body.appendChild(viewHighScoreBtn);
+    viewHighScoreBtn.innerHTML = "View High Scores";
 }
-
+//create event listener for when the Submit User Info button is pressed
 submitUserInfoEl.addEventListener("click", function(event) {
     event.preventDefault();
-  
+    timerInfo.textContent = "";
     var initials = document.querySelector("#initials").value;
-    
-  
     if (initials === "") {
       displayMessage("error", "Initials cannot be blank");
     } else {
-      question.textContent = "Successfully Submitted.";
-  
       localStorage.setItem("initials", initials);
       localStorage.setItem("score", score);
     }
+    scoreEl.textContent = "";
+    question.textContent = initials + ": " + score;
   });
+//create event listener and function when the view High Score Button is pressed
+  viewHighScoreBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    var highScorer = localStorage.getItem("initials");
+    var highScore = localStorage.getItem("score");
+    question.textContent = "Highest Score was " + highScore + " by " + highScorer;
+    body.removeChild(initialsEL);
+    body.removeChild(submitUserInfoEl);
+    body.removeChild(viewHighScoreBtn);
+    document.body.appendChild(clearHighScore);
 
+  });
+//create event listener when clear high schore button is pressed
+  clearHighScore.addEventListener("click", function(event) {
+    event.preventDefault();
+    var highScorer = localStorage.getItem("initials");
+    var highScore = localStorage.getItem("score");
+    question.textContent = "Highest Score was " + highScore + " by " + highScorer;
+    body.removeChild(initialsEL);
+    body.removeChild(submitUserInfoEl);
+    body.removeChild(viewHighScoreBtn);
+    document.body.appendChild(clearHighScore);
 
+  });
 
 
 startButton.addEventListener("click", startTimer);
