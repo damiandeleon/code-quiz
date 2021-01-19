@@ -20,6 +20,8 @@ var questionCycle = 0;
 var li = document.querySelectorAll("li");
 var score = 0;
 var timer;
+var initials = document.createElement("input");
+var submit = document.createElement("button");
 
 //**************************//
 
@@ -32,11 +34,13 @@ timerInfo.setAttribute("style", "font-size: 18px; font-weight: bold; background-
 scoreEl.setAttribute("style", "font-size: 18px; font-weight: bold");
 header.setAttribute("style", "width:100%");
 headerInfo.setAttribute("style", "color:green; margin:auto; text-align:center; background-color:lightgray; border:black solid; width:100%");
-directions.setAttribute("style", "font-size:13px; padding:5px; text-align:center");
+directions.setAttribute("style", "font-size:15px; padding:5px; text-align:center");
 container.setAttribute("style", "text-align:center");
 for (var i = 0; i < li.length; i++) {
     li[i].setAttribute("style", "display: flex; color: blue; font-weight: bolder; justify-content:right; border: black solid 1px; width:auto; background-color:lightgray; padding:5px");
 }
+initials.setAttribute("style", " display:block; margin-top:10px; margin-left:auto; margin-right:auto; background-color:whitesmoke; ")
+submit.setAttribute("style", "background-color:lightblue; width: 100px; height: 20px; display:block; margin-left:auto; margin-right:auto; margin-top:10px;");
 
 
 
@@ -48,7 +52,7 @@ function startTimer(event) {
     //disalble the start button after it has been pushed
     startButton.disabled = true;
     // Sets timer
-  timer = setInterval(function () {
+    timer = setInterval(function () {
         timerCount--;
         timerInfo.textContent = "Time remaining: " + timerCount;
 
@@ -91,91 +95,62 @@ quizQuestions = [
 ]
 //create a function that will insert the value of each question set into the html page.  For the answers, create buttons for them and insert the answer text inside the corresponding button.
 
-function presentQuestion(){
- 
+function presentQuestion() {
     console.log(questionCycle);
     answerList.textContent = "";
-     question.textContent = quizQuestions[questionCycle].question; 
+    question.textContent = quizQuestions[questionCycle].question;
     for (let i = 0; i < quizQuestions[questionCycle].choices.length; i++) {
-   
         var choicebutton = document.createElement("button");
         choicebutton.onclick = checkAnswer;
-        choicebutton.setAttribute("id", "choicebutton"+[i]);
+        choicebutton.setAttribute("id", "choicebutton" + [i]);
         choicebutton.setAttribute("value", quizQuestions[questionCycle].choices[i]);
         choicebutton.textContent = quizQuestions[questionCycle].choices[i];
         answerList.appendChild(choicebutton);
-
-
         //as the program cycles through presenting the question, call the function "checkAnswer"
-
     }
-
 }
+// write if function to check if the user entry matches "CorrectAnswer1" to execute the follow:  IF TRUE: increase score by 1, advance to presentQuestion2().  IF FALSE: no action on the score, reduce the time by 20 seconds, increase the questionCycle which will mark the index by which the for loop in the presentQuestion function will use.
 
-function checkAnswer(){
-    if(questionCycle == quizQuestions.length-1){
+function checkAnswer() {
+    if (questionCycle == quizQuestions.length - 1) {
         clearInterval(timer);
         timerInfo.textContent = "Game Over!";
+        scoreEl.textContent = "You're final score is " + score;
+        startButton.remove();
+        UserInfo();
     }
-    if(this.value !== quizQuestions[questionCycle].correctAnswer){
+    if (this.value !== quizQuestions[questionCycle].correctAnswer) {
         resultMessage("Wrong Answer")
-        questionCycle+=1;
-        timerCount-=20;
+        questionCycle += 1;
+        timerCount -= 20;
         presentQuestion();
     } else {
         resultMessage("Right Answer")
-        questionCycle+=1;
-        score+=1;
-        scoreEl.textContent = "Score: " + score; 
+        questionCycle += 1;
+        score += 1;
+        scoreEl.textContent = "Score: " + score;
         presentQuestion();
-    } 
+    }
+    //create a message for positive and immediate user experiene feedback on the result of the answer
+    function resultMessage(text) {
+        result.textContent = text;
 
-function resultMessage(text){
-    result.textContent = text;
-
-    setTimeout(function(){
-        result.textContent = '';
-    }, 1000);
+        setTimeout(function () {
+            result.textContent = '';
+        }, 1000);
+    }
 }
- 
-}
-
-
-
-
-//add a variable called "CorrectAnswer" that declares the correct answer
-//add event listener "click" that marks the user's entry
-// write if statement to check if the user entry matches "CorrectAnswer1" to execute the follow:  IF TRUE: increase score by 1, advance to presentQuestion2().  IF FALSE: no action on the score, reduce the time by 20 seconds, move on to presentQuestion2().
-// function presentQuestion(0)
-
-
-
-
-
-//question should show up as a text above the answers
-
-
-
-
-
-
-
-
-//(Maybe)create for loop to go through the index of the propery inex of the Q#answers string.
-
-//if the user's input matches the correct answer, move on to the next quesion and add 5 points
-
-//if the user's input does not equal the correct answer, substrct 20 seconds from the clock and move onto the next question
-//take the timer count and create a new variable that takes the times's current count, minus 20.  Then use that new varible to and create a new startTimer function (so that it will reinitialize the countdown from it's current spot)
-
-
-
 
 //function to accept the user's initials and score to save in the local storage
 
-// function UserInfo() {
+function UserInfo() {
+    question.textContent = "All Done!  Please enter your initials in the text box below and click submit.";
+    answerList.textContent = "";
+    document.body.appendChild(initials);
+    document.body.appendChild(submit);
+    submit.innerHTML = "Submit";
+    console.log("I'm am starting UserInfo");
+}
 
-// }
 
-//
 startButton.addEventListener("click", startTimer);
