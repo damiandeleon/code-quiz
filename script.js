@@ -45,6 +45,8 @@ for (var i = 0; i < li.length; i++) {
 //set up timer process
 timerCount = 60;
 function startTimer(event) {
+    //disalble the start button after it has been pushed
+    startButton.disabled = true;
     // Sets timer
   timer = setInterval(function () {
         timerCount--;
@@ -72,7 +74,7 @@ quizQuestions = [
         correctAnswer: "Yes",
     },
     {
-        question: "Which of the following functions returns a string value to uppoercase?",
+        question: "Which of the following functions returns a string value to uppercase?",
         choices: ["toLocateUpperCase()", "toUpperCase()", "toString()", "ubstring()"],
         correctAnswer: "toUpperCase()",
     },
@@ -116,15 +118,25 @@ function checkAnswer(){
         timerInfo.textContent = "Game Over!";
     }
     if(this.value !== quizQuestions[questionCycle].correctAnswer){
+        resultMessage("Wrong Answer")
         questionCycle+=1;
         timerCount-=20;
         presentQuestion();
     } else {
+        resultMessage("Right Answer")
         questionCycle+=1;
         score+=1;
-        scoreEl.textContent = score; 
+        scoreEl.textContent = "Score: " + score; 
         presentQuestion();
     } 
+
+function resultMessage(text){
+    result.textContent = text;
+
+    setTimeout(function(){
+        result.textContent = '';
+    }, 1000);
+}
  
 }
 
