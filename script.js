@@ -156,8 +156,6 @@ function UserInfo() {
     initialsEL.setAttribute("id", "initials");
     document.body.appendChild(submitUserInfoEl);
     submitUserInfoEl.innerHTML = "Submit";
-    document.body.appendChild(viewHighScoreBtn);
-    viewHighScoreBtn.innerHTML = "View High Scores";
 }
 //create event listener for when the Submit User Info button is pressed
 submitUserInfoEl.addEventListener("click", function(event) {
@@ -174,6 +172,10 @@ submitUserInfoEl.addEventListener("click", function(event) {
     question.textContent = initials + ": " + score;
     body.removeChild(submitUserInfoEl);
     body.removeChild(initialsEL);
+    document.body.appendChild(startOverBtn);
+    startOverBtn.textContent = "Start Over";
+    document.body.appendChild(viewHighScoreBtn);
+    viewHighScoreBtn.innerHTML = "View High Scores";
   });
 //create event listener and function when the view High Score Button is pressed
   viewHighScoreBtn.addEventListener("click", function(event) {
@@ -184,8 +186,7 @@ submitUserInfoEl.addEventListener("click", function(event) {
     body.removeChild(viewHighScoreBtn);
     document.body.appendChild(clearHighScore);
     clearHighScore.textContent = "Clear High Score";
-    document.body.appendChild(startOverBtn);
-    startOverBtn.textContent = "Start Over";
+    
 
   });
 //create event listener when clear high score button is pressed
@@ -194,6 +195,7 @@ submitUserInfoEl.addEventListener("click", function(event) {
     localStorage.clear();
     localStorage.clear();
     body.removeChild(clearHighScore);
+    question.textContent = "";
 
   });
 
