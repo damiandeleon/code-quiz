@@ -46,12 +46,13 @@ initialsEL.setAttribute("style", " display:block; margin-top:10px; margin-left:a
 submitUserInfoEl.setAttribute("style", "background-color:lightblue; width: 100px; height: 20px; display:block; margin-left:auto; margin-right:auto; margin-top:10px;");
 viewHighScoreBtn.setAttribute("style", "background-color:lightblue; width: 100px; height: 20px; display:block; margin-left:auto; margin-right:auto; margin-top:10px; font-size:10px");
 clearHighScore.setAttribute("style", "background-color:lightblue; width: 100px; height: 20px; display:block; margin-left:auto; margin-right:auto; margin-top:10px; font-size:10px;");
+startOverBtn.setAttribute("style", "background-color:lightblue; width: 100px; height: 20px; display:block; margin-left:auto; margin-right:auto; margin-top:10px;");
 
 
 
-
-
-//set up timer process
+init();
+function init () {
+    //set up timer process
 timerCount = 60;
 function startTimer(event) {
     //disalble the start button after it has been pushed
@@ -171,6 +172,8 @@ submitUserInfoEl.addEventListener("click", function(event) {
     }
     scoreEl.textContent = "";
     question.textContent = initials + ": " + score;
+    body.removeChild(submitUserInfoEl);
+    body.removeChild(initialsEL);
   });
 //create event listener and function when the view High Score Button is pressed
   viewHighScoreBtn.addEventListener("click", function(event) {
@@ -178,24 +181,26 @@ submitUserInfoEl.addEventListener("click", function(event) {
     var highScorer = localStorage.getItem("initials");
     var highScore = localStorage.getItem("score");
     question.textContent = "Highest Score was " + highScore + " by " + highScorer;
-    body.removeChild(initialsEL);
-    body.removeChild(submitUserInfoEl);
     body.removeChild(viewHighScoreBtn);
     document.body.appendChild(clearHighScore);
+    clearHighScore.textContent = "Clear High Score";
+    document.body.appendChild(startOverBtn);
+    startOverBtn.textContent = "Start Over";
 
   });
-//create event listener when clear high schore button is pressed
+//create event listener when clear high score button is pressed
   clearHighScore.addEventListener("click", function(event) {
     event.preventDefault();
-    var highScorer = localStorage.getItem("initials");
-    var highScore = localStorage.getItem("score");
-    question.textContent = "Highest Score was " + highScore + " by " + highScorer;
-    body.removeChild(initialsEL);
-    body.removeChild(submitUserInfoEl);
-    body.removeChild(viewHighScoreBtn);
-    document.body.appendChild(clearHighScore);
+    localStorage.clear();
+    localStorage.clear();
+    body.removeChild(clearHighScore);
 
   });
 
-
 startButton.addEventListener("click", startTimer);
+}
+//create event listener when start over button is pressed
+startOverBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    window.location.reload();
+    });
